@@ -22,8 +22,8 @@ Este serviço consome mensagens da fila **RabbitMQ** publicadas pelo microsservi
 
 ### 1. Clonar o repositório
 ```bash
-git clone https://github.com/AlexandreLiberatto/payment
-cd payment
+git clone https://github.com/AlexandreLiberatto/notification
+cd notification
 ```
 
 ### 2. Configurar as variáveis de ambiente
@@ -70,7 +70,7 @@ Simula o envio de notificações.
 ## **Contato**
 
 - **Nome:** Alexandre Liberato  
-- **GitHub:** [payment](https://github.com/AlexandreLiberatto/notification)  
+- **GitHub:** [Notification](https://github.com/AlexandreLiberatto/notification)  
 - **Email:** alexandreliberatto@gmail.com  
 
 ---
