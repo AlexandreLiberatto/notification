@@ -1,8 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
 import { DataMessage } from './types/message';
-import { Mail } from '@prisma/client';
-
+import { Mail, MailType } from '@prisma/client'; // Manter a importação como está
 
 @Injectable()
 export class MailService {

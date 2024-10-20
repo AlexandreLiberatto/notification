@@ -1,8 +1,9 @@
 import { Controller, Get, Logger, Query } from '@nestjs/common';
 import { MailService } from './mail.service';
-import { Mail } from '@prisma/client';
+import { Mail } from '@prisma/client'; // Removido MailType daqui
 import { Ctx, MessagePattern, Payload, RmqContext } from '@nestjs/microservices';
 import { DataMessage } from './types/message';
+import { MailType } from '@prisma/client'; // Mover a importação para o local apropriado
 
 @Controller('mail')
 export class MailController {
@@ -20,24 +21,21 @@ export class MailController {
     @Payload() payload: any,
     @Ctx() context: RmqContext,
   ) {
-
     try {
-
       this.logger.log(`data: ${JSON.stringify(payload)}`);
-      const DataMessage: DataMessage = JSON.parse(payload.data.notification);
+      const dataMessage: DataMessage = JSON.parse(payload.data.notification);
       const channel = context.getChannelRef();
-      const originalMesage = context.getMessage();
-      channel.ack(originalMesage);
-      await this.mailService.sendMail(DataMessage, MailType.orderConfirmation);
+      const originalMessage = context.getMessage();
+      channel.ack(originalMessage);
+
+      await this.mailService.sendMail(dataMessage, MailType.orderConfirmation);
       await this.mailService.persistNotification(
-        DataMessage,
+        dataMessage,
         MailType.orderConfirmation,
-    );
-      
+      );
     } catch (error) {
-      
+      this.logger.error(`Error: ${error.message}`, error.stack);
     }
-    
   }
 
   @MessagePattern('confirmation')
@@ -46,21 +44,21 @@ export class MailController {
     @Ctx() context: RmqContext,
   ) {
     try {
-
-      const DataMessage: DataMessage = JSON.parse(payload.data.notification);
+      const dataMessage: DataMessage = JSON.parse(payload.data.notification);
       const channel = context.getChannelRef();
-      const originalMesage = context.getMessage();
-      channel.ack(originalMesage);
+      const originalMessage = context.getMessage();
+      channel.ack(originalMessage);
+
       await this.mailService.sendMail(
-        DataMessage,
+        dataMessage,
         MailType.paymentConfirmation,
       );
       await this.mailService.persistNotification(
-        DataMessage,
+        dataMessage,
         MailType.paymentConfirmation,
-    );
-      
-    } catch (error) {   
+      );
+    } catch (error) {
+      this.logger.error(`Error: ${error.message}`, error.stack);
     }
   }
 }
