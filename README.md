@@ -1,4 +1,3 @@
-
 ---
 
 # Microsserviço: Notification  
@@ -12,8 +11,8 @@ Este serviço consome mensagens da fila **RabbitMQ** publicadas pelo microsservi
 
 ## **Requisitos**
 
-- **Node.js** (v18+)  
-- **npm**  
+- **Node.js** (v18+)
+- **npm**
 - **Docker** e **Docker Compose**
 
 ---
@@ -21,12 +20,14 @@ Este serviço consome mensagens da fila **RabbitMQ** publicadas pelo microsservi
 ## **Instalação e Execução**
 
 ### 1. Clonar o repositório
+
 ```bash
 git clone https://github.com/AlexandreLiberatto/notification
 cd notification
 ```
 
 ### 2. Configurar as variáveis de ambiente
+
 Crie um arquivo `.env` com as seguintes configurações:
 
 ```
@@ -34,11 +35,13 @@ DATABASE_URL="postgresql://postgres:root@localhost:5432/mydb?schema=public"
 ```
 
 ### 3. Instalar as dependências
+
 ```bash
 npm install
 ```
 
 ### 4. Subir os containers necessários
+
 Certifique-se de que o **RabbitMQ** está em execução com o comando:
 
 ```bash
@@ -46,6 +49,7 @@ docker-compose up -d
 ```
 
 ### 5. Iniciar o serviço
+
 ```bash
 npm start
 ```
@@ -55,21 +59,22 @@ npm start
 ## **Rotas Disponíveis**
 
 ### `GET /notificacoes`
+
 Simula o envio de notificações.
 
 ---
 
 ## **Tecnologias Utilizadas**
 
-- **Node.js**  
-- **RabbitMQ**  
+- **Node.js**
+- **RabbitMQ**
 
 ---
 
 ## **Contato**
 
-- **Nome:** Alexandre Liberato  
-- **GitHub:** [Notification](https://github.com/AlexandreLiberatto/notification)  
-- **Email:** alexandreliberatto@gmail.com  
+- **Nome:** Alexandre Liberato
+- **GitHub:** [Notification](https://github.com/AlexandreLiberatto/notification)
+- **Email:** alexandreliberatto@gmail.com
 
 ---
