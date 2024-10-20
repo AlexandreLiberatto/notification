@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
+import { DataMessage } from './types/message';
 
 @Injectable()
 export class MailService {
@@ -9,5 +10,34 @@ export class MailService {
         return await this.prisma.mail.fyndMany({
             where: { idUser },
         });
+    }
+
+    async sendMail(content: DataMessage, type: MailType) {
+        console.log(`sendMail - content = ${content} - type = ${type}`);
+        //implementar método para conectar e-mail...
+    }
+
+    async persistNotification(content: DataMessage, type: MailType) {
+        const data = {
+            idUser: content.idUser,
+            mailDestination: this.getDestination(content.idUser),
+            mailContent: this.makeContent(content.orderNumber, content.orderValue),
+            mailType: type,
+        };
+
+        await this.prisma.mail.create({ data: { ...data} });
+    }
+
+    getDestination(idUser: string){
+        switch (idUser){
+            case '10':
+                return 'user@teste.com.br'
+            default:
+                return 'default@teste.com.br'
+        }
+    }
+
+    makeContent(orderNumber:number, orderValue: number){
+        return `Número do pedido: ${orderNumber} - Valor do pedido: ${orderValue}`;
     }
 }
