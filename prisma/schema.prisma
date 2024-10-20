@@ -12,3 +12,18 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+enum MailType {
+  orderConfirmation
+  paymentConfirmation
+}
+
+model Mail {
+  id String @id @defalt(uuid())
+  idUser String 
+  mailDestination String
+  mailContent String
+  mailType MailType
+  createdAt DateTime @defalt(now())
+  updateAt DateTime @updateAt
+}

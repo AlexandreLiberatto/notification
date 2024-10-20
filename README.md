@@ -30,8 +30,7 @@ cd notification
 Crie um arquivo `.env` com as seguintes configurações:
 
 ```
-PORT=3001
-RABBITMQ_URL=amqp://localhost
+DATABASE_URL="postgresql://postgres:root@localhost:5432/mydb?schema=public"
 ```
 
 ### 3. Instalar as dependências
